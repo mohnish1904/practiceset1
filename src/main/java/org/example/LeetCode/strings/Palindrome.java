@@ -1,7 +1,6 @@
-package org.example.LeetCode;
+package org.example.LeetCode.strings;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
 public class Palindrome {
 

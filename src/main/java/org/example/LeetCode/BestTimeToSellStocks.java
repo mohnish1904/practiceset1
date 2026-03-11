@@ -22,18 +22,17 @@ public class BestTimeToSellStocks {
         return maxProfit;
     }
 
-//    private static int maxProfit(int[] arr) {
-//        int maxProfitValue = 0;
-//        int minPrice = Integer.MAX_VALUE;
-//
-//        for (int currDayPrice : arr){
-//            if (currDayPrice < minPrice){
-//                minPrice = currDayPrice;
-//            }
-//            if (maxProfitValue < currDayPrice - minPrice){
-//                maxProfitValue = currDayPrice - minPrice;
-//            }
-//        }
-//        return maxProfitValue;
-//    }
+    private static int maxProfit1(int[] arr) {
+        int max = 0 ;
+        int min = Integer.MAX_VALUE;
+
+        for (int price : arr ){
+            if (price < min){
+                min = price;
+            } else if ((price - min) > max){
+                max = price - min;
+            }
+        }
+        return max;
+    }
 }

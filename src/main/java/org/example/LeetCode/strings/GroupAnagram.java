@@ -1,14 +1,16 @@
-package org.example.LeetCode;
+package org.example.LeetCode.strings;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class GroupAnagram {
 
 
     public static void main(String[] args) {
-        String[] strs = {"eat","tea","tan","ate","nat","bat"};
-        groupAnagrams(strs);
+        String[] strs = {"eat", "tea", "tan", "ate", "nat", "bat"};
+        List<List<String>> lists = groupAnagrams1(strs);
+        lists.forEach(System.out::println);
     }
 
     private static void groupAnagrams(String[] strs) {
@@ -36,23 +38,23 @@ public class GroupAnagram {
 //        System.out.println(hashMap.values());
     }
 
-//    public static List<List<String>> groupAnagrams(String[] strs) {
-//        String[] arr = strs;
-//        Map<String, List<String>> map = new HashMap<>();
-//        for (String word : arr){
-//            char[] charArray = word.toCharArray();
-//            Arrays.sort(charArray);
-//            String str = Arrays.toString(charArray);
-//
-//            if (!map.containsKey(str))
-//                map.put(str, new ArrayList<>());
-//
-//            map.get(str).add(word);
-//        }
-//        return new ArrayList<>(map.values());
-//    }
+    public static List<List<String>> groupAnagrams1(String[] strs) {
+        HashMap<String, List<String>> map = new HashMap<>();
+        for (String str : strs) {
 
+            String sortedStr = Arrays.stream(str.split("")).sorted().collect(Collectors.joining(""));
 
-
+            if (map.containsKey(sortedStr)) {
+                List<String> list = map.get(sortedStr);
+                list.add(str);
+                map.put(sortedStr, list);
+            } else {
+                map.put(sortedStr, new ArrayList<>(List.of(str)));
+            }
+        }
+        List<List<String>> result = new ArrayList<>();
+        map.forEach((key, value) -> result.add(value));
+        return result;
+    }
 
 }
