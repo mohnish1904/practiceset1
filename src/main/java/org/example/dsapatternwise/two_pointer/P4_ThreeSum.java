@@ -1,8 +1,7 @@
 package org.example.dsapatternwise.two_pointer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class P4_ThreeSum {
 
@@ -36,38 +35,48 @@ public class P4_ThreeSum {
      * Explanation: The only possible triplet sums up to 0.
      *
      *
-     * Constraints:
+     * Constranums:
      *
      * 3 <= nums.length <= 3000
      * -105 <= nums[i] <= 105
      */
     public static void main(String[] args) {
-        System.out.println(threeSum(new int[]{-1, 0,1,2,-1,-4}));
+        System.out.println(threeSum(new int[]{-1,0,1,2,-1,-4}));
     }
 
-    private static List<List<Integer>> threeSum(int[] ints) {
-        int idx = 0;
-        List<List<Integer>> result = new ArrayList<>();
+    private static List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> result = new HashSet<>();
 
         // sort the array
-        Arrays.sort(ints); // nlogn
+        Arrays.sort(nums); // nlogn
 
-        for (int currIdx = 0; currIdx < ints.length - 3; currIdx++) {
+        for (int currIdx = 0; currIdx < nums.length - 1; currIdx++) {
+
+            if (currIdx !=0 && nums[currIdx]==nums[currIdx-1]) continue;
+            if (nums[currIdx]>0) break;
 
             int leftIdx = currIdx+1;
-            int rightIdx = ints.length-1;
-            while(currIdx != leftIdx && currIdx != rightIdx && leftIdx != rightIdx){
-                int sum = ints[currIdx] + ints[leftIdx] + ints[rightIdx];
+            int rightIdx = nums.length-1;
+            while(currIdx != leftIdx && leftIdx < rightIdx && currIdx != rightIdx){
+                int sum = nums[currIdx] + nums[leftIdx] + nums[rightIdx];
                 if (sum == 0) {
-                    result.add(new ArrayList<>(Arrays.asList(ints[currIdx], ints[leftIdx], ints[rightIdx])));
-                    break;
+                    result.add(new ArrayList<>(Arrays.asList(nums[currIdx], nums[leftIdx], nums[rightIdx])));
+                    do {
+                        leftIdx++;
+                    } while (leftIdx < rightIdx && nums[leftIdx-1] == nums[leftIdx]);
+
+                    do {
+                        rightIdx--;
+                    } while (leftIdx < rightIdx && nums[rightIdx] == nums[rightIdx+1]);
+
                 } else if (sum > 0) {
                     rightIdx--;
                 } else {
                     leftIdx++;
                 }
             }
+
         }
-        return  result;
+        return new ArrayList<>(result);
     }
 }
