@@ -14,8 +14,8 @@ public class P1_TwoSumWithDups {
     // array is sorted
     public static int[] twoSum2Pointer(int[] numbers, int target) {
 
-        // its a array
-        // its a sorted array so index vlaue can be provided
+        // it's an array
+        // it's a sorted array so index vlaue can be provided
         // need to find pair
         int size = numbers.length;
         int l = 0, r = size - 1;
