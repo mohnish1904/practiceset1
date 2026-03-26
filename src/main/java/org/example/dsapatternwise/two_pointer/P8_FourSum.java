@@ -1,8 +1,8 @@
 package org.example.dsapatternwise.two_pointer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigInteger;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class P8_FourSum {
     /**
@@ -24,35 +24,53 @@ public class P8_FourSum {
      * 1 <= nums.length <= 200
      * -109 <= nums[i] <= 109
      * -109 <= target <= 109
+     * <p>
+     * -3,-1,0,2,4,5
      */
 
     public static void main(String[] args) {
-        System.out.println(fourSum(new int[]{1, 0, -1, 0, -2, 2}, 0));
+        System.out.println(fourSum(new int[]{1000000000, 1000000000, 1000000000, 1000000000}, -294967296));
     }
 
     private static List<List<Integer>> fourSum(int[] nums, int target) {
-        List<List<Integer>> result = new ArrayList<>();
+        Set<List<Integer>> result = new HashSet<>();
         int low = 0;
-        int high = nums.length - 1;
-
+        int size = nums.length;
         Arrays.sort(nums);
-        while (low < high) {
-            int left = low + 1;
-            int right = high - 1;
-            while (left < right && left < high && right > low) {
-                int sum = nums[low] + nums[left] + nums[right] + nums[high];
-                if (sum == target) {
-                    result.add(List.of(nums[low], nums[left], nums[right], nums[high]));
-                    left++;
-                } else if (sum < target) {
-                    left++;
-                } else {
-                    right--;
+
+        if (size < 4) return new ArrayList<>();
+
+        if (size == 4) {
+            long resultSum = Arrays.stream(nums).mapToLong(e->e).sum();
+            if (resultSum != target) {
+                return new ArrayList<>();
+            } else {
+                result.add(Arrays.stream(nums).boxed().collect(Collectors.toList()));
+            }
+        }
+
+        while (size > 4 && low < size) {
+            int high = low + 1;
+            while (high < size) {
+                int left = high + 1;
+                int right = size - 1;
+                while (left < right) {
+                    long sum = nums[low] + nums[left] + nums[right] + nums[high];
+                    if (sum == target) {
+                        result.add(List.of(nums[low], nums[left], nums[right], nums[high]));
+                        left++;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        right--;
+                    }
                 }
+                high++;
             }
             low++;
-            high--;
         }
-        return result;
+        return new ArrayList<>(result);
     }
+
+
 }
