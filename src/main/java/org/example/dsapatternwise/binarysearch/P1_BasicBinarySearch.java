@@ -37,9 +37,9 @@ public class P1_BasicBinarySearch {
             if (target == nums[mid])
                 return mid;
             else if (target > nums[mid])
-                low++;
+                low = mid +1;
             else
-                high--;
+                high = mid-1;
         }
         return -1;
     }
