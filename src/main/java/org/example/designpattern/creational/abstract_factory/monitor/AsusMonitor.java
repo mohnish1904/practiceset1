@@ -1,4 +1,4 @@
-package org.example.designpattern.abstract_factory.monitor;
+package org.example.designpattern.creational.abstract_factory.monitor;
 
 public class AsusMonitor implements Monitor{
     @Override

@@ -1,4 +1,4 @@
-package org.example.designpattern.factory_pattern;
+package org.example.designpattern.creational.factory_pattern;
 
 public class Bike implements MotorVehicle{
     @Override

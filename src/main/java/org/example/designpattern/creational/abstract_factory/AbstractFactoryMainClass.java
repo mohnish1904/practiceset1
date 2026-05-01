@@ -1,7 +1,7 @@
-package org.example.designpattern.abstract_factory;
+package org.example.designpattern.creational.abstract_factory;
 
-import org.example.designpattern.abstract_factory.gpu.GPU;
-import org.example.designpattern.abstract_factory.monitor.Monitor;
+import org.example.designpattern.creational.abstract_factory.gpu.GPU;
+import org.example.designpattern.creational.abstract_factory.monitor.Monitor;
 
 public class AbstractFactoryMainClass {
 

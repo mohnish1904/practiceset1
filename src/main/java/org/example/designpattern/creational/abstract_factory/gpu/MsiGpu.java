@@ -1,4 +1,4 @@
-package org.example.designpattern.abstract_factory.gpu;
+package org.example.designpattern.creational.abstract_factory.gpu;
 
 public class MsiGpu implements GPU{
     @Override
