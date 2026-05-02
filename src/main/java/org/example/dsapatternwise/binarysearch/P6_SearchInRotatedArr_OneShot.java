@@ -34,7 +34,7 @@ public class P6_SearchInRotatedArr_OneShot {
      */
 
     public static void main(String[] args) {
-        int[] nums = {5, 6, 7, 8, 9, 0, 1, 2, 3, 4};
+        int[] nums = {4,5,6,7,0,1,2};
         System.out.println(searchInRotatedArr(nums, 0));
     }
 
@@ -45,10 +45,15 @@ public class P6_SearchInRotatedArr_OneShot {
         int left = 0;
         int size = nums.length - 1;
         int right = size;
+        if(nums.length == 0) return -1;
+
+        if (nums.length == 1){
+            return nums[0] == target ? 0 : -1;
+        }
 
         // part 1 : nums[0] - highest Val
         if (target > nums[size]) {
-            while (left < right) {
+            while (left <= right) {
                 int mid = (left + right) / 2;
 
                 if (target == nums[mid]) return mid;
@@ -62,7 +67,7 @@ public class P6_SearchInRotatedArr_OneShot {
                         left = mid + 1;
                     }
                     // guess lt a[size]
-                    if (nums[mid] < nums[size])
+                    else
                         right = right - 1;
                 }
             }
